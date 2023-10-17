@@ -50,5 +50,24 @@ greeting('2100')             | Good evening!          | 14
 
 #region bailam
 def greeting(hour_str):
-  return 'todo'
+  if '1pm' in hour_str:
+    return 'Good afternoon!'
+  
+  else:
+    if 'a' in hour_str or 'A' in hour_str or 'p' in hour_str or 'P' in hour_str or 'm' in hour_str or 'M' in hour_str:
+      if 'a' in hour_str or 'A' in hour_str:
+        return 'Good morning!'
+      elif 'p' in hour_str or 'P' in hour_str:
+        return 'Good evening!'
+      
+    else:
+      hour_str.replace('a','').replace('A','').replace('P','').replace('p','').replace(':','').replace('00','').replace(' ','')
+      if int(hour_str)<12 or int(hour_str)<12 and 'a' in hour_str:
+        return 'Good morning!'
+      elif int(hour_str)<6 or int(hour_str)<6 and 'p' in hour_str:
+        return 'Good afternoon!'
+      else:
+        return 'Good evening!'
+      
+  
 #endregion bailam
