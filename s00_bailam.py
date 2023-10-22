@@ -47,27 +47,36 @@ greeting('2100')             | Good evening!          | 14
 
 """
 #endregion debai
+import re
+    
 
 #region bailam
 def greeting(hour_str):
-  if '1pm' in hour_str:
-    return 'Good afternoon!'
+  hour_str=hour_str.lower()
+  wordy=re.findall('am|pm',hour_str)
+  numy=re.findall(r'\d+',hour_str)
+  num = numy[0]
+  num = num.replace(' ','').replace(':','').replace("00",'')
+  num = num[:2]
+  num = int(num)
+  try:
+    word=str(wordy[0]).lower()
+  except:
+    pass
   
-  else:
-    if 'a' in hour_str or 'A' in hour_str or 'p' in hour_str or 'P' in hour_str or 'm' in hour_str or 'M' in hour_str:
-      if 'a' in hour_str or 'A' in hour_str:
-        return 'Good morning!'
-      elif 'p' in hour_str or 'P' in hour_str:
-        return 'Good evening!'
-      
-    else:
-      hour_str.replace('a','').replace('A','').replace('P','').replace('p','').replace(':','').replace('00','').replace(' ','')
-      if int(hour_str)<12 or int(hour_str)<12 and 'a' in hour_str:
-        return 'Good morning!'
-      elif int(hour_str)<6 or int(hour_str)<6 and 'p' in hour_str:
-        return 'Good afternoon!'
-      else:
-        return 'Good evening!'
-      
+  if numy!=[] and wordy!=[]:
+    if word=='pm' and num >= 1 and num<=5:
+      return 'Good afternoon!'
+    elif word=='pm' and num>=6 and num<=12:
+      return 'Good evening!'
+    elif num<=12:
+      return 'Good morning!'
+  elif numy!=[] and wordy==[]:
+    if num>=0 and num<=12:
+      return 'Good morning!'
+    elif num>=12 and num<=17:
+      return 'Good afternoon!'
+    elif num<=24:
+      return 'Good evening!'
   
 #endregion bailam
